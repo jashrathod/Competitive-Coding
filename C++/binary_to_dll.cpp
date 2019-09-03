@@ -1,5 +1,8 @@
 // BINARY TREE TO DOUBLY LINKED LIST
 
+
+// Method 1
+
 void inord(Node *n, queue<int> &q)
 {
     if(n == NULL)  return;
@@ -25,4 +28,22 @@ void bToDLL(Node *root, Node **head_ref)
         q.pop();
     }
     p->right = NULL;
+}
+
+// Method 2
+
+void bToDLL(Node *root, Node **head_ref)
+{
+    if (root == NULL)  return; 
+    
+    bToDLL(root->right, head_ref); 
+     
+    root->right = *head_ref; 
+    
+    if (*head_ref != NULL)  
+        (*head_ref)->left = root; 
+
+    *head_ref = root; 
+   
+    bToDLL(root->left, head_ref);
 }
